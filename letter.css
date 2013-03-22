@@ -1,0 +1,67 @@
+body {
+	background-color: #010e01;
+}
+
+#intro {
+	width: 98%;
+	height: 98%;
+	background: #010e01 url("img/Cloudcroft-Envelope-Front_300sma.jpg") no-repeat center center;
+	z-index: 100;
+}
+
+	#intro img {
+		margin:auto;
+	}
+
+#map,
+#media,
+#letter {
+	position:absolute;
+	width:48%;
+	height:98%;
+}
+
+#letter {
+	top: 1%;
+	left: 20px;
+}
+
+.page,
+#intro  {
+	position:absolute;
+	opacity: 0;
+
+	-webkit-transition: opacity 1s ease;
+	-moz-transition: opacity 1s ease;
+	-o-transition: opacity 1s ease;
+	transition: opacity 1s ease;
+}
+
+	.page.active,
+	#intro.shown  {
+		opacity: 1;
+	}
+
+	.page img {
+		height:100%;
+	}
+
+
+#media {
+	top: 1%;
+	right: 20px;
+	height:48%;
+}
+
+
+#map {
+	bottom:10px;
+	right:20px;
+	height:400px;
+}
+
+#player {
+	position: absolute;
+	bottom:5px;
+	left:20px;
+}
