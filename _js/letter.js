@@ -153,7 +153,7 @@
           });
 
         pop.cue("1:27", function () {
-            addMapPin(38.879551, -77.079964, "Fort Myer, VA", 14);
+            addMapPin(38.879551, -77.079964, "Fort Myer, VA", 12);
           });
  
         pop.cue("1:44", function () {
