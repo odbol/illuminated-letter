@@ -218,7 +218,7 @@
 
         // ending
         pop.on("ended", function () {
-          addMedia('https://vimeo.com/59180676', 'Documentary', 'vimeo');
+          addMedia('http://player.vimeo.com/video/59180676', 'Documentary', 'vimeo');
         });
 
 
