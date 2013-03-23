@@ -208,6 +208,10 @@
           addMedia('img/timeline/Washington-Heights-1946/piggly_wiggly.jpg', 'Washington Heights', 'image', true);
         });   
 
+        pop.cue("1:43", function () {
+          addMedia('video/V2_footage.m4v', 'V2 Testing', 'video');
+        });
+
         pop.cue("2:04", function () {
           addMedia('img/timeline/carlsbad.jpg', 'Carlsbad Caverns', 'image');
         });   
