@@ -3,6 +3,7 @@
 (function( $ , exports){
 
   var 
+    /********* LETTER **********/
     nextPage = function nextPage() {
       $('#letter .active')
         .removeClass('active')
@@ -12,6 +13,8 @@
 
     showPage = nextPage, // lazy
 
+
+    /********* MAP **********/
     gmap = null,
 
     addMapPin = function addMapPin(lat, lon, title, zoom) {
@@ -33,6 +36,62 @@
 
       return null;
     },
+
+
+    /********* MEDIA **********/
+    curZIndex = 10,
+    addMedia = function addMedia(url, title, type, isVertical) {
+      var html = '',
+          attrs = 'class="item ' + type + 
+            (isVertical ? ' vertical' : ' horizontal') + 
+            '" style="z-index:' + (++curZIndex) + ';"';
+
+      switch (type) {
+        case 'image':
+          html = '<img src="' + url + '" '  + attrs + ' />';
+          break;
+        case 'video':
+          var 
+            image = [url],
+            vidTag = '<video ' + attrs;
+
+          vidTag += " autoplay='true' loop='true'>";
+  
+          for (var i in image) {
+              vidTag += "<source src='" + url + "'";
+              //vidTag += " type='" + image[i].mimetype + "'";
+              vidTag += " />";
+          }
+          vidTag += "</video>";
+
+          html = vidTag;
+          break;
+        default:
+          return;
+      }
+
+      //html = '<div ' + attrs + '>' + html + '</div>';
+
+      var el = $(html)
+        .appendTo('#media');
+
+      el.centerImage('inside');
+
+      el
+        .fadeIn('slow')
+        // remove old videos after they've cross faded
+        .siblings()
+          .fadeOut('slow')
+          .each(function (i, el) {
+            var $self = $(this);
+
+            setTimeout(2000, function () {
+              $self.remove();
+            });
+          });
+    },
+
+
 
     init = function () {
  
@@ -64,7 +123,7 @@
           });
 
         pop.cue(22, function () {
-            addMapPin(52.518101, 13.3933, "University of Berlin, Germany", 8);
+            addMapPin(52.518101, 13.3933, "University of Berlin, Germany");
           });
 
         pop.cue(27, function () {
@@ -76,7 +135,7 @@
           });
  
         pop.cue("1:44", function () {
-            addMapPin(32.765827, -106.30394, "White Sands, NM", 10);
+            addMapPin(32.765827, -106.30394, "White Sands, NM", 8);
           });
 
         pop.cue("2:02", function () {
@@ -91,6 +150,24 @@
 
         pop.cue("1:39", function () {
           showPage(3);
+        });
+
+        // VIDEOS
+
+        pop.cue(1, function () {
+          addMedia('video/Dear_Ma.m4v', 'Dear Ma', 'video');
+        });
+
+        pop.cue(4, function () {
+          addMedia('img/timeline/slide_rule/Sliderule.jpg', 'Slide Rule', 'image');
+        });        
+
+        pop.cue(11, function () {
+          addMedia('img/timeline/HiliteDrSchilling.jpg', 'Dr. Schilling', 'image');
+        });
+
+        pop.cue(27, function () {
+          addMedia('img/timeline/Peenemunde/Peenemundeworkers.jpg', 'Peenemunde Workers', 'image', true);
         });
 
         // play the video right away

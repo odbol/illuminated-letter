@@ -53,6 +53,18 @@ body {
 	height:48%;
 }
 
+	#media .item {
+		position: absolute;
+	}
+
+	#media .horizontal .inner {
+		width: 100%;
+	}
+
+	#media .vertical .inner {
+		height: 100%;
+	}
+
 
 #map {
 	bottom:10px;
