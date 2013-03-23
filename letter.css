@@ -13,6 +13,27 @@ body {
 		margin:auto;
 	}
 
+	#intro h1,
+	#intro p  {
+		position: absolute;
+		background-color: rgba(5, 9, 5, 0.68);
+		color:#fffffe;
+		font-family: Futura, sans-serif;
+		padding:20px;
+	}
+
+	#intro p {
+		font-size:18px;
+		bottom: 20px;
+		text-align: right;
+		width:98%;
+	}
+
+	#intro h1 {
+		top: 10px;
+		font-size:26px;
+	}
+
 #outro {
 	display:none;
 	background-color: rgba(5, 9, 5, 0.68);
