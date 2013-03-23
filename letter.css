@@ -13,6 +13,22 @@ body {
 		margin:auto;
 	}
 
+#outro {
+	display:none;
+	background-color: rgba(5,10,5, 130);
+	width: 100%;
+	height:100%;
+}
+	#outro p {
+		width: 300px;
+		height: 30px;
+		text-align: center;
+		margin:auto;
+		color:#fffffe;
+		font-size:26px;
+		cursor: pointer;
+	}
+
 #map,
 #media,
 #letter {
@@ -70,6 +86,13 @@ body {
 	bottom:10px;
 	right:20px;
 	height:400px;
+
+-moz-box-shadow:0px 0px 7px #000000;
+-webkit-box-shadow:0px 0px 7px #000000;
+box-shadow:0px 0px 7px #000000;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px; 
 }
 
 #player {

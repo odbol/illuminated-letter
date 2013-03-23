@@ -14,6 +14,14 @@
     showPage = nextPage, // lazy
 
 
+    showEnding = function showEnding() {
+      $('#outro').show();
+
+      $('#intro')
+
+        .fadeIn(2000);
+    },
+
     /********* MAP **********/
     gmap = null,
 
@@ -42,6 +50,7 @@
     curZIndex = 10,
     addMedia = function addMedia(url, title, type, isVertical) {
       var html = '',
+          vimeoId = null,
           attrs = 'class="item ' + type + 
             (isVertical ? ' vertical' : ' horizontal') + 
             '" style="z-index:' + (++curZIndex) + ';"';
@@ -55,7 +64,7 @@
             image = [url],
             vidTag = '<video ' + attrs;
 
-          vidTag += " autoplay='true' loop='true'>";
+          vidTag += " autoplay='true' loop='true' muted='true'>";
   
           for (var i in image) {
               vidTag += "<source src='" + url + "'";
@@ -65,6 +74,11 @@
           vidTag += "</video>";
 
           html = vidTag;
+          break;
+        case 'vimeo':
+          vimeoId = 'vimeo_' + curZIndex;
+          html = '<div id="' + vimeoId + '" />';
+
           break;
         default:
           return;
@@ -89,6 +103,14 @@
               $self.remove();
             });
           });
+
+      if (vimeoId) {
+
+          var vim = Popcorn.vimeo( "#" + vimeoId, url );
+          vim.play();
+
+          vim.on('ended', showEnding);
+      }
     },
 
 
@@ -131,7 +153,7 @@
           });
 
         pop.cue("1:27", function () {
-            addMapPin(38.879551, -77.079964, "Fort Myer, VA", 8);
+            addMapPin(38.879551, -77.079964, "Fort Myer, VA", 14);
           });
  
         pop.cue("1:44", function () {
@@ -152,13 +174,13 @@
           showPage(3);
         });
 
-        // VIDEOS
 
+        // VIDEOS
         pop.cue(1, function () {
           addMedia('video/Dear_Ma.m4v', 'Dear Ma', 'video');
         });
 
-        pop.cue(4, function () {
+        pop.cue(5, function () {
           addMedia('img/timeline/slide_rule/Sliderule.jpg', 'Slide Rule', 'image');
         });        
 
@@ -170,6 +192,33 @@
           addMedia('img/timeline/Peenemunde/Peenemundeworkers.jpg', 'Peenemunde Workers', 'image', true);
         });
 
+        pop.cue(36, function () {
+          addMedia('video/Nazi_V2s.m4v', 'V2 Rocket', 'video');
+        });
+
+        pop.cue("1:09", function () {
+          addMedia('img/timeline/Jewish.jpg', 'Jewish', 'image', true);
+        });
+
+        pop.cue("1:29", function () {
+          addMedia('img/timeline/Washington-Heights-1946/Drug_Store.jpg', 'Drug Store', 'image', true);
+        });       
+
+        pop.cue("1:33", function () {
+          addMedia('img/timeline/Washington-Heights-1946/piggly_wiggly.jpg', 'Washington Heights', 'image', true);
+        });   
+
+        pop.cue("2:04", function () {
+          addMedia('img/timeline/carlsbad.jpg', 'Carlsbad Caverns', 'image');
+        });   
+
+        // ending
+        pop.on("ended", function () {
+          addMedia('https://vimeo.com/59180676', 'Documentary', 'vimeo');
+        });
+
+
+
         // play the video right away
         pop.play();
     };
@@ -180,8 +229,12 @@
     $('#letter').on('click', '.page', nextPage);
 
     $('#intro').click(function () {
-      $('#intro').fadeOut('slow', init);//.removeClass('shown');
+      $('#intro').fadeOut(2000, init);//.removeClass('shown');
     });
+
+     $('#outro').click(function() {
+        window.reload(false);
+     });
 
 
 })( jQuery, window );
